@@ -1,0 +1,381 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=SF+Pro+Display:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 158 84% 40%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 35 92% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --muted: 210 40% 93%;
+    --muted-foreground: 215 16% 47%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .dark {
+    --background: 217 33% 12%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 213.3 94% 67.8%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 160 84% 52%;
+    --secondary-foreground: 222 47% 11%;
+
+    --accent: 45 96% 56%;
+    --accent-foreground: 222 47% 11%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --destructive: 0 70% 70%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 213.3 94% 67.8%;
+    
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 213.3 94% 67.8%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 213.3 94% 67.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .status-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium transition-all duration-300;
+  }
+  
+  .status-badge-pending {
+    @apply bg-amber-500/15 text-amber-600 dark:bg-amber-400/15 dark:text-amber-400 border border-amber-500/20 dark:border-amber-400/20;
+  }
+  
+  .status-badge-in-progress {
+    @apply bg-indigo-500/15 text-indigo-600 dark:bg-indigo-400/15 dark:text-indigo-400 border border-indigo-500/20 dark:border-indigo-400/20;
+  }
+  
+  .status-badge-resolved {
+    @apply bg-emerald-500/15 text-emerald-600 dark:bg-emerald-400/15 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-400/20;
+  }
+  
+  .drop-area {
+    @apply border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center transition-all duration-300;
+  }
+  
+  .drop-area-active {
+    @apply border-primary bg-primary/5 dark:border-primary dark:bg-primary/5;
+  }
+  
+  .category-icon {
+    @apply p-2 rounded-full transition-all duration-300;
+  }
+
+  /* Card styles */
+  .civic-card {
+    @apply bg-card dark:bg-card rounded-xl border border-border dark:border-border shadow-lg hover:shadow-xl transition-all duration-500 hover:translate-y-[-5px];
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary/90 dark:bg-primary dark:hover:bg-primary/90 transition-all duration-300 rounded-xl px-4 py-2 font-medium;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-primary text-primary hover:bg-primary/10 dark:border-primary dark:text-primary dark:hover:bg-primary/10 transition-all duration-300 rounded-xl px-4 py-2 font-medium;
+  }
+  
+  .btn-success {
+    @apply bg-emerald-500 text-white hover:bg-opacity-90 dark:bg-emerald-500 dark:hover:bg-opacity-90 transition-all duration-300 rounded-xl px-4 py-2 font-medium;
+  }
+  
+  /* Animation utilities */
+  .animate-enter {
+    @apply animate-fade-in animate-duration-300;
+  }
+  
+  .animate-hover-lift {
+    @apply transition-transform duration-500 hover:-translate-y-2 hover:shadow-xl;
+  }
+  
+  .animate-hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  /* Glassmorphism */
+  .glass-morphism {
+    @apply bg-white/80 dark:bg-card/90 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
+  }
+
+  /* Confetti animation for vote button */
+  .confetti {
+    @apply fixed w-2 h-2 rounded-full z-50 pointer-events-none;
+    animation: confetti-fall 3s ease-in-out forwards;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(-10px) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  /* Vote button ping effect */
+  .vote-ping {
+    @apply absolute inset-0 rounded-full;
+    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ping {
+    75%, 100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  /* Custom hover effects */
+  .hover-border-glow {
+    @apply transition-all duration-300 border-transparent;
+  }
+  
+  .hover-border-glow:hover {
+    @apply border-primary/50 shadow-[0_0_15px_rgba(var(--primary)/0.3)];
+  }
+  
+  /* Gradient buttons */
+  .btn-gradient {
+    @apply relative overflow-hidden text-white font-medium rounded-xl px-6 py-2.5;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.8) 100%);
+  }
+  
+  .btn-gradient::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    content: '';
+    background: linear-gradient(135deg, hsl(var(--primary)/0.8) 0%, hsl(var(--primary)) 100%);
+  }
+  
+  .btn-gradient:hover::before {
+    @apply opacity-100;
+  }
+  
+  .btn-gradient span {
+    @apply relative z-10;
+  }
+  
+  /* Shimmer effect */
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer::after {
+    @apply absolute top-0 right-0 bottom-0 left-0;
+    content: '';
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 2.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-indigo-500 dark:from-primary dark:to-blue-400;
+  }
+  
+  .btn-bounce:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Shiny accent for important elements */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(30deg);
+  }
+}
+
+/* Floating animation for hero elements */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* 3D card effect */
+.card-3d {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: translateY(-5px) rotateX(5deg);
+}
+
+/* New ribbon effect */
+.ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ribbon-content {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 8px 0;
+  background-color: hsl(var(--primary));
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: rotate(45deg);
+  right: -65px;
+  top: 30px;
+}
+
+/* Ripple effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.ripple:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}
