@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { Issue } from "@/types";
@@ -182,10 +181,10 @@ const IssueCard = ({
             {/* Footer with metadata */}
             <div className="flex items-center justify-between mt-3 pt-3 border-t border-border/30">
               <div className="flex flex-col">
-                <div className="text-sm text-muted-foreground truncate max-w-[70%]">
+                <div className="text-sm text-muted-foreground truncate max-w-[170px]" title={issue.location}>
                   <span className="inline-flex items-center">
                     <MapPin className="w-3.5 h-3.5 mr-1.5 text-accent dark:text-accent" />
-                    <span className="truncate">{issue.location}</span>
+                    <span className="truncate max-w-[130px] align-middle" title={issue.location}>{issue.location}</span>
                   </span>
                 </div>
                 <span className="text-xs text-muted-foreground mt-1.5">By: {creatorName} • {timeAgo}</span>
