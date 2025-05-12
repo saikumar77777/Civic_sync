@@ -20,6 +20,7 @@ import CategoryIcon from "@/components/issues/CategoryIcon";
 import { IssueCategory, IssueStatus } from "@/types";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 // Helper function for debouncing
 const debounce = <F extends (...args: any[]) => any>(
@@ -80,6 +81,7 @@ const MapView: React.FC<MapViewProps> = ({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
+  const { theme } = useTheme();
   
   // Define filteredIssues before using it
   const filteredIssues = issues.filter(issue => {
@@ -200,12 +202,19 @@ const MapView: React.FC<MapViewProps> = ({
       // If this is the selected issue, add a popup
       if (isSelected) {
         const popupNode = document.createElement('div');
+        // Determine popup styles based on theme
+        const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const popupBg = isDark ? '#23272f' : '#fff';
+        const popupColor = isDark ? '#f1f5f9' : '#23272f';
+        const popupBorder = isDark ? '#334155' : '#e5e7eb';
+        const btnBg = '#2563EB';
+        const btnColor = '#fff';
         popupNode.innerHTML = `
-          <div style="min-width:180px;max-width:220px;">
+          <div style="min-width:180px;max-width:220px;background:${popupBg};color:${popupColor};border:1px solid ${popupBorder};border-radius:10px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,0.10);">
             <strong>${issue.title}</strong><br/>
             <span style="font-size:12px;">${issue.category} | ${issue.status}</span><br/>
             <span style="font-size:12px; font-weight: 500; color: #2563EB;">${issue.votes} vote${issue.votes === 1 ? '' : 's'}</span><br/>
-            <button id="view-details-btn" style="margin-top:6px;padding:4px 8px;background:#2563EB;color:white;border:none;border-radius:4px;cursor:pointer;">View Details</button>
+            <button id="view-details-btn" style="margin-top:6px;padding:4px 8px;background:${btnBg};color:${btnColor};border:none;border-radius:4px;cursor:pointer;">View Details</button>
           </div>
         `;
         const popup = new mapboxgl.Popup({ offset: 25 })

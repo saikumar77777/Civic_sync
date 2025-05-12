@@ -83,7 +83,10 @@ const BrowseIssues = () => {
         description: "Your vote has been counted!",
         variant: "default",
       });
-      window.location.reload();
+      // Instead, update the displayed issues state directly
+      setDisplayedIssues(prev => prev.map(issue =>
+        issue.id === issueId ? { ...issue, votes: issue.votes + 1 } : issue
+      ));
     } catch (error) {
       console.error("Error voting:", error);
       toast({
